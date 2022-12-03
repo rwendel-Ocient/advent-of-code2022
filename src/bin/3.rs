@@ -63,24 +63,15 @@ fn part_two(lines: &[&str]) -> usize {
             let mut check_against: [u32; 53] = [0; 53];
             let mut found = None;
             line_chunk.into_iter().enumerate().for_each(|(i, line)|{
-                println!("on line {}", line);
                 let chars_priority = line.chars().map(|c| to_priority(&c));
                 chars_priority.for_each(|x| {
-                        assert!(i < 3);
-                        if x == 18 {
-                            println!("on r, check_against: {}", check_against[x]);
-                        }
                         check_against[x] = check_against[x] | (1 << (i ));
-                        assert!(7 == 0b111u32);
                         if check_against[x] == 0b111u32 {
                             if found.is_none() {
                                 found = Some(x)
                             } else {
                                 assert!(found.unwrap() == x)
                             }
-                        }
-                        if x == 18 {
-                            println!("on r, after check_against: {}", check_against[x]);
                         }
                     });
                 });
